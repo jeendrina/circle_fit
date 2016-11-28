@@ -1,0 +1,18 @@
+
+
+    boby {
+        background: black;
+    }
+    .form-signin{
+        color: orange;
+        font-family: sans-serif;
+        position:fixed;
+        display: inline;
+        float:left;
+    }
+
+    .btn-primary {
+        color: green;
+        font-weight: bold;
+        font-variant-caps:all-petite-caps;
+    }

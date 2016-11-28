@@ -1,0 +1,53 @@
+<?php
+
+//~ Template for index.php
+// variables:
+//  $template - page to be displayed (included)
+//  $flashes - flash messages
+
+?>
+<!DOCTYPE html>
+<head>
+    <title><?= $headTemplate->getTitle(); ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="keywords" content="Circle-Fit" />
+    <meta name="author" content="Jemarve Endrina" />
+
+    <link type="text/css" href="css/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/layout.css" rel="stylesheet" type="text/css" />
+
+
+    <script type="text/javascript" src="js/script.js"></script>
+
+</head>
+<body id="page">
+    <div class="tail-top-right"></div>
+    <div id="main">
+        <!-- header -->
+        <div id="header"></div>
+        <!-- content -->
+        <div id="content">
+            <div class="wrapper">
+              
+                <div class="col-2">
+                    <div class="indent">
+                        <?php if ($flashes): ?>
+                            <ul id="flashes">
+                            <?php foreach ($flashes as $flash): ?>
+                                <li><?php echo $flash; ?></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <?php require $template; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+       
+    </div>
+</body>
+</html>
