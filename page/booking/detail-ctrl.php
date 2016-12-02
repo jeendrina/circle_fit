@@ -1,7 +1,7 @@
 <?php
 
-$headTemplate = new HeadTemplate('Booking details | Fly to the Limit', 'Booking details');
-
+$headTemplate = new HeadTemplate('Booking details | Circle Fit', 'Booking details');
+$dao = new BookingDao();
 // data for template
-$activity = Utils::getBookingByGetId();
-$tooLate = $activity->getStatus() == Booking::STATUS_PENDING && $activity->getDueOn() < new DateTime();
+$booking = Utils::getObjByGetId($dao);
+$tooLate = $booking->getStatus() == User::STATUS_ACTIVE && $booking->getDueOn() < new DateTime();

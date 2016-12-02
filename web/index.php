@@ -38,7 +38,7 @@ final class Index {
             header('HTTP/1.0 404 Not Found');
             $this->runErrorPage('404', $extra);
         } else {
-            // TODO log exception
+            // log exception
             header('HTTP/1.1 500 Internal Server Error');
             $this->runErrorPage('404', $extra);
         }
@@ -63,7 +63,6 @@ final class Index {
             'User' => '../model/User.php',
             'Booking' => '../model/Booking.php',
             'Activity' => '../model/Activity.php',
-            'BookingSearchCriteria' => '../dao/TodoSearchCriteria.php',
             'ActivityValidator' => '../validation/ActivityValidator.php',
             'BookingValidator' => '../validation/BookingValidator.php',
             'UserValidator' => '../validation/UserValidator.php',
@@ -90,11 +89,11 @@ final class Index {
 
     private function checkPage($page) {
         if (!preg_match('/^[a-z0-9-]+$/i', $page)) {
-            // TODO log attempt, redirect attacker, ...
+            // log attempt, redirect attacker, ...
             throw new NotFoundException('Unsafe page "' . $page . '" requested');
         }
         if (!$this->hasScript($page) && !$this->hasTemplate($page)) {
-            // TODO log attempt, redirect attacker, ...
+            // log attempt, redirect attacker, ...
             throw new NotFoundException('Page "' . $page . '" not found');
         }
         return $page;

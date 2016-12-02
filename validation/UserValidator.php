@@ -26,6 +26,15 @@ final class UserValidator {
             $errors[] = new Error('lastName', 'Empty or invalid last name.'); 
                 }
         
+          
+        if (!$user->getEmail()) {
+            $errors[] = new Error('email', 'Empty or invalid email.'); 
+                }
+        
+                  
+        if (!$user->getPassword()) {
+            $errors[] = new Error('password', 'Empty or invalid password.'); 
+                }
         
 //        if (!trim($user->getTitle())) {
 //            $errors[] = new Error('title', 'Title cannot be empty.');

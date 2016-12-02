@@ -1,31 +1,20 @@
-<?php
+<h1>BOOKINGS</h1>
 
-
-//~ Template for list.php
-// variables:
-//  $title - page title
-//  $status - status of TODOs to be displayed
-//  $todos - TODOs to be displayed
-
-?>
-
-<h1>Bookings</h1>
-
-<?php if (empty($activities)): ?>
+<?php if (empty($bookings)): ?>
     <p>No bookings found.</p>
 <?php else: ?>
     <ul class="list">
-        <?php foreach ($activities as $activity): ?>
+        <?php foreach ($bookings as $booking): ?>
             <li>                
-                <h3><a href="<?php echo Utils::createLink('detail', 
-                        array('id' => $activity->getId())) ?>"><?php 
-                        echo Utils::escape($activity->getflightName()); ?></a></h3>                
-                <p><span class="label">Flight date:</span> <?php 
-                echo Utils::escape(Utils::formatDateTime($activity->getFlightDate())); 
-                ?></p>
-                <p><a href="index.php?module=booking&page=add-edit&id=<?php echo $activity->getId()?>">Edit</a>
-                <a href="index.php?module=booking&page=delete&id=<?php echo $activity->getId()?>">Delete</a></p>
+                <h3><a href="<?php echo Utils::createLink('detail', array('id' => $booking->getBookingId(), 'module' => 'booking'))
+            ?>"><?php echo Utils::formatDate($booking->getBookingDate()); ?></a></h3> 
+                <a href="#"><?php echo Utils::escape($booking->getUser()->getFirstName()) . ' ' . Utils::escape($booking->getUser()->getLastName()); ?></a>
+                                 <p><span class="label">Booking date:</span> <?php
+               echo Utils::escape(Utils::formatDate($booking->getBookingDate()));
+            ?></p>
+                <p><a href="index.php?module=booking&page=add-edit&id=<?php echo $booking->getBookingId() ?>">Edit</a>
+                    | <a href="index.php?module=booking&page=delete&id=<?php echo $booking->getBookingId() ?>">Delete</a></p>
             </li>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
     </ul>
-<?php endif; ?>
+    <?php endif; ?>

@@ -36,7 +36,7 @@ if ($edit) {
             // save
             $dao = new ActivityDao();
             $activity = $dao->save($activity);
-            Flash::addFlash('User saved successfully.');
+            Flash::addFlash('Activity saved successfully.');
             // redirect
             Utils::redirect('list', array('module' => 'activity'));
         }

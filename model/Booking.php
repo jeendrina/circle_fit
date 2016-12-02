@@ -1,25 +1,30 @@
 <?php
 
-class User {
+class booking {
 
-    private $id;
+    private $bookingId;
     private $bookingDate;
-    private $bookingTime;
     private $status;
+//    private $imageUrl;
     private $userId;
     private $activityId;
+    private $user;
 
-    function getId() {
-        return $this->id;
-    }
-
-    function getBookingTime() {
-        return $this->bookingTime;
+    function getBookingId() {
+        return $this->bookingId;
     }
 
     function getBookingDate() {
         return $this->bookingDate;
     }
+
+    function getStatus() {
+        return $this->status;
+    }
+
+//    function getImageUrl() {
+//        return $this->imageUrl;
+//    }
 
     function getUserId() {
         return $this->userId;
@@ -29,38 +34,37 @@ class User {
         return $this->activityId;
     }
 
-    function setId($id) {
-        $this->id = $id;
-    }
-
-    function setBookingtime($bookingTime) {
-        $this->flightName = $bookingTime;
+    function setBookingId($bookingId) {
+        $this->bookingId = $bookingId;
     }
 
     function setBookingDate($bookingDate) {
         $this->bookingDate = $bookingDate;
     }
 
-    function setUserId($user_id) {
-        $this->userId = $user_id;
-    }
-
-    function setactivity($activity_id) {
-        $this->activityId = $activity_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status) {
+    function setStatus($status) {
         $this->status = $status;
     }
+
+//    function setImageUrl($imageUrl) {
+//        $this->imageUrl = $imageUrl;
+//    }
+
+    function setUserId($userId) {
+        $this->userId = $userId;
+    }
+
+    function setActivityId($activityId) {
+        $this->activityId = $activityId;
+    }
+    
+    function getUser() {
+        return $this->user;
+    }
+
+    function setUser(User $user) {
+        $this->user = $user;
+    }
+
 
 }

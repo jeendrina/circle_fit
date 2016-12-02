@@ -1,10 +1,5 @@
 <?php
 
-
-/**
- * Validator for {@link Todo}.
- * @see TodoMapper
- */
 final class BookingValidator {
 
     private function __construct() {
@@ -15,15 +10,15 @@ final class BookingValidator {
      * @param User $booking {@link Todo} instance to be validated
      * @return array array of {@link Error} s
      */
-    public static function validate(User $booking) {
+    public static function validate(Booking $booking) {
         $errors = array();
-        if (!$booking->getFlightName()) {
-            $errors[] = new Error('flightName', 'Empty or invalid flight name.');
+        if (!$booking->getBookingDate()) {
+            $errors[] = new Error('activityName', 'Empty or invalid activity name.');
         }
       
         
-        if (!$booking->getFlightDate()) {
-            $errors[] = new Error('flightDate', 'Empty or invalid flioght date.'); 
+        if (!$booking->getBookingDate()) {
+            $errors[] = new Error('bookingDate', 'Empty or invalid booking date.'); 
                 }
         
         

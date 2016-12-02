@@ -1,14 +1,13 @@
 <?php
 
-
-$activity = Utils::getTodoByGetId();
-$activity->setStatus(Utils::getUrlParam('status'));
+$booking = Utils::getBookingByGetId();
+$booking->setStatus(Utils::getUrlParam('status'));
 if (array_key_exists('comment', $_POST)) {
-    $activity->setComment($_POST['comment']);
+    $booking->setComment($_POST['comment']);
 }
 
-$dao = new TodoDao();
-$dao->save($activity);
-Flash::addFlash('TODO status changed successfully.');
+$dao = new BookingDao();
+$dao->save($booking);
+Flash::addFlash('BOOKING status changed successfully.');
 
-Utils::redirect('detail', array('id' => $activity->getId()));
+Utils::redirect('detail', array('id' => $booking->getBookingId()));

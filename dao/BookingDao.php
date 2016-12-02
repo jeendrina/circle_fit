@@ -1,11 +1,9 @@
 <?php
 
-
 class BookingDao {
-    
+
     /** @var PDO */
     private $db = null;
-
 
     public function __destruct() {
         // close db connection
@@ -17,20 +15,22 @@ class BookingDao {
      * @return array array of {@link Booking}s
      */
     public function find($sql) {
-        $result = array();
+//        $result = array();
+
         foreach ($this->query($sql) as $row) {
             $booking = new Booking();
             BookingMapper::map($booking, $row);
-            $result[$booking->getBookingId()] = $booking;
+//            $result[$booking->getId()] = $booking;
+            $result [] = $booking;
         }
         return $result;
     }
 
     /**
-     * Find {@link Todo} by identifier.
-     * @return Todo Todo or <i>null</i> if not found
+     * Find {@link Booking} by identifier.
+     * @return Booking or <i>null</i> if not found
      */
-    public function findByBookingId($id) {
+    public function findById($id) {
         $row = $this->query('SELECT * FROM bookings WHERE status != "deleted" and booking_id = ' . (int) $id)->fetch();
         if (!$row) {
             return null;
@@ -88,58 +88,56 @@ class BookingDao {
     }
 
     /**
-     * @return User
+     * @return Booking
      * @throws Exception
      */
-    private function insert(User $booking) {
+    private function insert(Booking $booking) {
         $now = new DateTime();
-        $booking->setId(null);
+        $booking->setbookingId(null);
         $booking->setStatus('pending');
         $sql = '
-              INSERT INTO bookings (booking_id, booking_date, booking time, status, user_id, activity_id)
-                VALUES (:booking_id, :booking_Date, :booking_time, :status, :user_id, :activity_id)';
+              INSERT INTO bookings (booking_id, booking_date, status, user_id, activity_id)
+                VALUES (:booking_id, :booking_date, :status, :user_id, :activity_id)';
         return $this->execute($sql, $booking);
     }
 
     /**
-     * @return User
+     * @return Booking
      * @throws Exception
      */
-    private function update(User $booking) {
+    private function update(Booking $booking) {
         $sql = '
             UPDATE bookings SET
-                booking_Date = :booking_Date,
-                booking_time = :booking_time,
+                booking_date = :booking_date,
                 status = :status,
-                user_id = :user_id
-                booking_id = :id
+                user_id = :user_id,
+                activity_id = :activity_id
             WHERE
-                id = :id';
+                booking_id = :booking_id';
         return $this->execute($sql, $booking);
     }
 
     /**
-     * @return User
+     * @return Booking
      * @throws Exception
      */
-    private function execute($sql, User $booking) {
+    private function execute($sql, Booking $booking) {
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams($booking));
-        if (!$booking->getBookingId()) {
+        if ($booking->getBookingId()) {
             return $this->findById($this->getDb()->lastInsertId());
         }
         return $booking;
     }
 
-    private function getParams(User $booking) {
+    private function getParams(Booking $booking) {
         //:id,:flight_name, :flight_date, :date_created, :status, :user_id
         $params = array(
-            ':id' => $booking->getId(),
-            ':booking_time' => $booking->getBookingTime(),
-            ':booking_date' => self::formatDate($booking->getFlightDate()),
+            ':booking_id' => $booking->getBookingId(),
+            ':booking_date' => self::formatDateTime($booking->getBookingDate()),
             ':status' => $booking->getStatus(),
-            ':user_id' => $booking->getUserId,
-            ':activity_id' => $booking->getActivityId
+            ':user_id' => $booking->getUserId(),
+            ':activity_id' => $booking->getActivityId(),
         );
 //        var_dump($booking);
 //        echo '<br>';
@@ -166,11 +164,12 @@ class BookingDao {
     }
 
     private static function throwDbError(array $errorInfo) {
-        // TODO log error, send email, etc.
+        // BOOKING log error, send email, etc.
         throw new Exception('DB error [' . $errorInfo[0] . ', ' . $errorInfo[1] . ']: ' . $errorInfo[2]);
     }
 
     private static function formatDateTime(DateTime $date) {
         return $date->format(DateTime::ISO8601);
     }
+
 }

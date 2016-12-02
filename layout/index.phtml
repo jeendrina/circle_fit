@@ -1,10 +1,8 @@
 <?php
-
 //~ Template for index.php
 // variables:
 //  $template - page to be displayed (included)
 //  $flashes - flash messages
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -15,29 +13,53 @@
     <meta name="author" content="Jemarve Endrina" />
 
     <link type="text/css" href="css/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../web/css/redmond/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../web/css/redmond/style.css" rel="stylesheet" type="text/css" />
 
 
+    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
 </head>
 <body id="page">
-    <div class="tail-top-right"></div>
-    <div id="main">
-        <!-- header -->
-        <div id="header"></div>
-        <!-- content -->
+
+    <!-- header -->
+    <header id="header">
+        <div class="login-logout">
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                <a href="index.php?module=auth&page=login">Login</a>
+            <?php else: ?>
+                <a href="index.php?module=auth&page=logout">Logout</a>
+            <?php endif; ?>
+            <a href="index.php?module=auth&page=register">Register</a>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 col-md-offset-8">
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active"> <a href="index.php?module=home&page=home">HOME</a></li>
+                    <li role="presentation" class="active"> <a href="index.php?module=activities&page=activities">ACTIVITIES</a> </li>
+                    <li role="presentation" class="active">    <a href="index.php?module=about&page=about">ABOUT</a></li>
+                    <li role="presentation" class="active">   <a href="index.php?module=contact&page=contact">CONTACT</a></li>
+                </ul>
+            </div>
+            </div>
+        
+    </header>
+    <!-- main content -->
+    <main id="main">
         <div id="content">
             <div class="wrapper">
-              
+
                 <div class="col-2">
                     <div class="indent">
                         <?php if ($flashes): ?>
                             <ul id="flashes">
-                            <?php foreach ($flashes as $flash): ?>
-                                <li><?php echo $flash; ?></li>
-                            <?php endforeach; ?>
+                                <?php foreach ($flashes as $flash): ?>
+                                    <li><?php echo $flash; ?></li>
+                                <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
 
@@ -46,8 +68,12 @@
                 </div>
             </div>
         </div>
-        <!-- footer -->
-       
-    </div>
+    </main>
+
+    <!-- footer -->
+    <footer>
+
+    </footer>
+
 </body>
 </html>

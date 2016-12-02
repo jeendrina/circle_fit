@@ -23,7 +23,19 @@ class UserDao {
 
 
     public function findById($id) {
+        
         $row = $this->query('SELECT * FROM users WHERE status != "deleted" and id = ' . (int) $id)->fetch();
+        if (!$row) {
+            return null;
+        }
+        $user = new User();
+        UserMapper::map($user, $row);
+        return $user;
+    }
+    
+    public function findByCredentials($email,$password) {
+      //  SELECT * FROM `users` WHERE email = 'boo@email.com' AND password = 'password123';
+           $row = $this->query('SELECT * FROM users WHERE status != "deleted" and email = "'. $email . '" AND password = "' . $password  . '"')->fetch();
         if (!$row) {
             return null;
         }

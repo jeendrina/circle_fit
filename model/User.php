@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Description of User
- *
- * @author richard_lovell
- */
+
 class User {
 
     private $id;
